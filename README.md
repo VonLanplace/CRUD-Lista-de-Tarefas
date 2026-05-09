@@ -1,58 +1,100 @@
-Crie uma janela para o desenvolvimento de uma Lista de Tarefas (ToDo List)
+# CRUD Lista de Tarefas (ToDo List)
 
-Nota: as "caixas" são feitas com o componente/elemento CheckBox. Para fazer com que ela tenha o aspecto de selecionada, utilize o comando {nome_do_elemento}.setSelected(true);
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-blue?style=for-the-badge)
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)
 
-Todos os outros itens são os Labels, TextFields. TextAreas e Buttons
+Este projeto é uma aplicação de gerenciamento de tarefas (ToDo List) desenvolvida em Java, focada na implementação de uma interface gráfica intuitiva utilizando **JavaFX** e gerenciamento de dependências via **Gradle**.
 
+## 📋 Funcionalidades
+
+O sistema permite ao usuário gerenciar seu fluxo de trabalho através das seguintes capacidades:
+
+*   **Adicionar Tarefa:** Criação de novas tarefas com título e descrição opcional.
+*   **Listagem Dinâmica:** Visualização de todas as tarefas em um painel rolável (**ScrollPane**).
+*   **Status de Conclusão:** Utilização de `CheckBox` para marcar tarefas como feitas.
+*   **Gestão de Datas:** Ao concluir uma tarefa (`setSelected(true)`), um `DatePicker` é habilitado para registrar a data de finalização.
+*   **Edição e Remoção:** Botões dedicados para atualizar o conteúdo de uma tarefa ou excluí-la da lista.
+*   **Indicadores de Performance:** Painel de resumo que exibe em tempo real o total de tarefas, pendentes e concluídas.
+
+---
+
+## 🖼️ Protótipo da Interface
+
+Abaixo está o layout estrutural da janela principal:
 ```text
-+-------------------------------------------+
-|   TodoList                                |
-+-------------------------------------------+
-|       Digite uma nova tarefa...   []      |
-|       Descrição (opicional)       []      |
-|                                           |
-|       []  Revisar para a prova            |
-|                                           |
-|       +----------------------------+      |
-|       |Lorem ipsum dolor sid amet. |      |
-|       +----------------------------|      |
-|                                           |
-|       []  Desenvover atividades JavaFx    |
-|                                           |
-|       +----------------------------+      |
-|       |Lorem ipsum dolor sid amet. |      |
-|       +----------------------------|      |
-|                                           |
-|       []  Revisar para a prova            |
-|                                           |
-|       +----------------------------+      |
-|       |Lorem ipsum dolor sid amet. |      |
-|       +----------------------------|      |
-|                                           |
-|       3 Total 2 Pendentes 1 Concluída     |
-+-------------------------------------------+
-```
-
-Quando a tarefa for concluída, a tela deve mostrar um DatePicker para escolher a data de conclusão
-
-Faça os Labels debaixo mostrarem os totalizadores dos tipos das tarefas
-
-```text
-|                                           |
-|       3 Total 2 Pendentes 1 Concluída     |
-+-------------------------------------------+
++-----------------------------------------------------------------------+
+|   TodoList                                                            |
++-----------------------------------------------------------------------+
+|   Digite uma nova tarefa...   [ TextField    ]   [ Botão Adicionar]   |
+|   Descrição (opcional)        [ TextArea     ]                        |
+|                                                                       |
+|   [Scroll Pane (Conteúdo Dinâmico)]                                   |
+|   --------------------------------------------------------------------|
+|   [X] Revisar prova         [ 16/04/2026 ]      [ Deletar ]           |
+|       Descrição: Lorem ipsum...                 [ Atualizar ]         |
+|   --------------------------------------------------------------------|
+|                                                                       |
+|   3 Total | 2 Pendentes | 1 Concluída                                 |
++-----------------------------------------------------------------------+
 
 ```
 
+---
 
-Para permitir que existam diversas tarefas na tela, utilize um **ScrollPane** envolvendo o painel que contém as tarefas.
+## 🛠️ Tecnologias e Implementação
+
+O projeto utiliza o **Gradle** com o plugin oficial do JavaFX para simplificar a compilação e execução, eliminando a necessidade de configurar os módulos manualmente no comando de execução.
+
+### Configuração Gradle (`build.gradle`)
+
+O projeto está configurado para incluir os módulos necessários:
+
+* `javafx.controls`
+* `javafx.fxml`
+
+### Estrutura do ScrollPane
 
 ```java
-VBox painel = new VBox();
+VBox painelTarefas = new VBox(10); 
+ScrollPane scroll = new ScrollPane();
+scroll.setPrefSize(400, 300);
+scroll.setContent(painelTarefas);
 
-// Adicione os componentes para mostrar as tarefas, em seguida envolva o painel no ScrollPane
-
-ScrollPane s1 = new ScrollPane();
-s1.setPrefSize(120, 120);
-s1.setContent( painel );
 ```
+
+---
+
+## 🚀 Como Executar
+
+Como o projeto utiliza o plugin do JavaFX para Gradle, você não precisa se preocupar com o caminho das bibliotecas nativas.
+
+1. **Clone o repositório:**
+```bash
+git clone [https://github.com/seu-usuario/CRUD_Lista_de_Tarefas.git](https://github.com/seu-usuario/CRUD_Lista_de_Tarefas.git)
+cd CRUD_Lista_de_Tarefas
+
+```
+
+
+2. **Execute via Terminal:**
+   Utilize o wrapper do Gradle incluído no projeto:
+```bash
+# Linux/macOS
+./gradlew run
+
+# Windows
+gradlew.bat run
+
+```
+
+
+3. **Importação na IDE:**
+* **IntelliJ:** File > Open > Selecione a pasta do projeto.
+* **VS Code:** Certifique-se de ter a "Extension Pack for Java" instalada e abra a pasta.
+
+
+
+---
+
+*Desenvolvido para consolidar conceitos de CRUD, layouts dinâmicos e automação de builds com Gradle.*
