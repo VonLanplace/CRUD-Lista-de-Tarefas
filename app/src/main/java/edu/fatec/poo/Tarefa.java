@@ -1,9 +1,12 @@
 package edu.fatec.poo;
 
+import java.time.LocalDate;
+
 public class Tarefa {
     private String nome;
     private String descricao;
     private boolean completa;
+    private LocalDate dataFim;
 
 
     public Tarefa() {
@@ -37,5 +40,13 @@ public class Tarefa {
 
     public void setCompleta(boolean completa) {
         this.completa = completa;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
     }
 }
