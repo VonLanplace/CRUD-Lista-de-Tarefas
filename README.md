@@ -71,7 +71,7 @@ Como o projeto utiliza o plugin do JavaFX para Gradle, você não precisa se pre
 
 1. **Clone o repositório:**
 ```bash
-git clone [https://github.com/seu-usuario/CRUD_Lista_de_Tarefas.git](https://github.com/seu-usuario/CRUD_Lista_de_Tarefas.git)
+git clone [https://github.com/VonLanplace/CRUD-Lista-de-Tarefas](https://github.com/VonLanplace/CRUD-Lista-de-Tarefas)
 cd CRUD_Lista_de_Tarefas
 
 ```
