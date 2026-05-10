@@ -18,6 +18,13 @@ public class Tarefa {
         this.completa = completa;
     }
 
+    public void clear() {
+        nome = null;
+        descricao = null;
+        completa = false;
+        dataFim = null;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -49,4 +56,15 @@ public class Tarefa {
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
+
+    @Override
+    public String toString() {
+        return "Tarefa{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", completa=" + completa +
+                ", dataFim=" + dataFim +
+                '}';
+    }
+
 }

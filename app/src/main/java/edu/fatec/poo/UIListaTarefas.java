@@ -1,13 +1,9 @@
 package edu.fatec.poo;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -15,12 +11,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class UIListaTarefas extends Application {
+import static edu.fatec.poo.Format.*;
 
-    public static final double WHIDITH = 720;
-    public static final double HEIGTH = 420;
-    public static final double SPACING = 10;
-    public static final Insets INSETS = new Insets(10);
+public class UIListaTarefas extends Application {
 
     private CListaTarefas control = new CListaTarefas();
 
@@ -31,8 +24,9 @@ public class UIListaTarefas extends Application {
     private Label lblNova = new Label("Digite uma nova Tarefa...");
     private Label lblDesc = new Label("Descrição (opicional)");
 
-    private TextField txtNova = new TextField();
-    private TextField txtDesc = new TextField();
+    private TextField txtNome = new TextField();
+
+    private TextArea txaDesc = new TextArea();
 
     private Button btnAdicionar = new Button("Adicionar");
 
@@ -47,42 +41,43 @@ public class UIListaTarefas extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        txtNome.textProperty().bindBidirectional(control.nomeProperty());
+        txaDesc.textProperty().bindBidirectional(control.descricaoProperty());
+
         paneCenter.setContent(paneTarefas);
         paneCenter.setFitToWidth(true);
-        paneCenter.setPadding(INSETS);
+        paneCenter.setPadding(PADING);
 
         borderPane.setTop(paneTop);
         borderPane.setCenter(paneCenter);
         borderPane.setBottom(paneBottom);
 
-        paneTop.setPadding(INSETS);
+        paneTop.setPadding(PADING);
         paneTop.setVgap(SPACING);
         paneTop.setHgap(SPACING);
         paneTop.setAlignment(Pos.CENTER);
 
         paneTop.add(lblNova, 0, 0);
-        paneTop.add(txtNova, 1, 0);
+        paneTop.add(txtNome, 1, 0);
         paneTop.add(btnAdicionar, 2, 0);
         paneTop.add(lblDesc, 0, 1);
-        paneTop.add(txtDesc, 1, 1);
+        paneTop.add(txaDesc, 1, 1);
+
+        txaDesc.setPrefRowCount(3);
+        txaDesc.setPrefColumnCount(30);
+        txaDesc.setWrapText(true);
 
         btnAdicionar.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
-            System.out.println("ADICIONAR");
-            paneTarefas.getChildren().add(new UITarefa(
-                    new Tarefa("pau", "pedra", false),
-                    SPACING, INSETS
-            ));
+            control.criarTarefa(paneTarefas);
             stage.show();
-            // TODO
-            //paneBottom.getChildren().add(control.criarTarefa());
         }));
 
         paneBottom.setSpacing(SPACING);
-        paneBottom.setPadding(INSETS);
+        paneBottom.setPadding(PADING);
         paneBottom.setAlignment(Pos.CENTER);
         paneBottom.getChildren().addAll(lblTotal, lblPendente, lblConcluida);
 
-        Scene scene = new Scene(borderPane, WHIDITH, HEIGTH);
+        Scene scene = new Scene(borderPane, WIDTH, HEIGHT);
         stage.setScene(scene);
         stage.show();
     }
